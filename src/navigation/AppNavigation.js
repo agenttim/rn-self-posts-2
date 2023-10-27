@@ -6,7 +6,7 @@ import {Platform} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 import {MainScreen, mainScreenOptions} from '../screens/MainScreen';
-import {PostScreen} from '../screens/PostScreen';
+import {PostScreen, postScreenOptions} from '../screens/PostScreen';
 import {BookedScreen} from '../screens/BookedScreen';
 
 import {THEME} from '../theme';
@@ -52,7 +52,7 @@ function PostNavigator() {
             headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
         }}>
             <PostStack.Screen name="Main" component={MainScreen} options={mainScreenOptions}/>
-            <PostStack.Screen name="Post" component={PostScreen}/>
+            <PostStack.Screen name="Post" component={PostScreen} options={postScreenOptions}/>
         </PostStack.Navigator>
     );
 }

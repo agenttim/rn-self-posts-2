@@ -6,56 +6,48 @@ import {HeaderButtons} from "react-navigation-header-buttons/src/HeaderButtons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {Item} from "react-navigation-header-buttons";
 
-export const PostScreen = ({navigation}) => {
-    console.log(navigation.getId('postId'))
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Post Screen</Text>
+export const PostScreen = ({navigation, route}) => {
 
 
-        </View>
-    );
+   const postId = route.params.postId
 
-/*    const postId = navigation.getParam('postId')
+   const post = DATA.find(p => p.id === postId)
 
-    const post = DATA.find(p => p.id === postId)
+   useEffect(()=> {
+       navigation.setParams({booked: post.booked})
+   }, [])
 
-    useEffect(()=> {
-        navigation.setParams({booked: post.booked})
-    }, [])
+   const removeHandler = () => {
+       Alert.alert('Удаление поста', 'Вы точно хотите удалить пост?', [
+               {
+                   text: 'Отменить',
+                   style: 'cancel'
+               },
+               {
+                   text: 'Удалить',
+                   onPress: () => {
+                   },
+                   style: 'destructive',
+               },
+           ],
+           {cancelable: false}
+       )
+   }
 
-    const removeHandler = () => {
-        Alert.alert('Удаление поста', 'Вы точно хотите удалить пост?', [
-                {
-                    text: 'Отменить',
-                    style: 'cancel'
-                },
-                {
-                    text: 'Удалить',
-                    onPress: () => {
-                    },
-                    style: 'destructive',
-                },
-            ],
-            {cancelable: false}
-        )
-    }
-
-    return (
-        <ScrollView>
-            <Image source={{uri: post.img}} style={styles.image}/>
-            <View style={styles.textWrap}>
-                <Text style={styles.title}>{post.text}</Text>
-            </View>
-            <Button title='Удалить' color={THEME.DANGER_COLOR} onPress={removeHandler}/>
-        </ScrollView>
-    )*/
+   return (
+       <ScrollView>
+           <Image source={{uri: post.img}} style={styles.image}/>
+           <View style={styles.textWrap}>
+               <Text style={styles.title}>{post.text}</Text>
+           </View>
+           <Button title='Удалить' color={THEME.DANGER_COLOR} onPress={removeHandler}/>
+       </ScrollView>
+   )
 }
 
-/*
-PostScreen.navigationOptions = ({navigation}) => {
-    const date = navigation.getParam('date')
-    const booked = navigation.getParam('booked')
+export const postScreenOptions = ({navigation, route}) => {
+    const date = route.params.date
+    const booked = route.params.booked
     const iconName = booked ? 'ios-star' : 'ios-star-outline'
 
     return {
@@ -81,4 +73,4 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'open-regular',
     }
-})*/
+})
