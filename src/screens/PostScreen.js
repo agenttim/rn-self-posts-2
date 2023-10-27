@@ -7,7 +7,16 @@ import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {Item} from "react-navigation-header-buttons";
 
 export const PostScreen = ({navigation}) => {
-    const postId = navigation.getParam('postId')
+    console.log(navigation.getId('postId'))
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Post Screen</Text>
+
+
+        </View>
+    );
+
+/*    const postId = navigation.getParam('postId')
 
     const post = DATA.find(p => p.id === postId)
 
@@ -40,9 +49,10 @@ export const PostScreen = ({navigation}) => {
             </View>
             <Button title='Удалить' color={THEME.DANGER_COLOR} onPress={removeHandler}/>
         </ScrollView>
-    )
+    )*/
 }
 
+/*
 PostScreen.navigationOptions = ({navigation}) => {
     const date = navigation.getParam('date')
     const booked = navigation.getParam('booked')
@@ -71,4 +81,4 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'open-regular',
     }
-})
+})*/
