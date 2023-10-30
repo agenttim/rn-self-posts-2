@@ -2,7 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Platform, SafeAreaView} from 'react-native';
+import {Platform} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 import {MainScreen, mainScreenOptions} from '../screens/MainScreen';
@@ -10,7 +10,6 @@ import {PostScreen, postScreenOptions} from '../screens/PostScreen';
 import {BookedScreen, bookedScreenOptions} from '../screens/BookedScreen';
 
 import {THEME} from '../theme';
-import {Post} from "../components/Post";
 import {createMaterialBottomTabNavigator} from "react-native-paper/react-navigation";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 
@@ -43,7 +42,7 @@ export default function AppNavigation() {
                     shifting={true}
                 >
                     <Tab.Screen
-                        name="Post"
+                        name="PostTab"
                         component={PostNavigator}
                         options={{
                             tabBarIcon: route => (
@@ -53,7 +52,7 @@ export default function AppNavigation() {
                         }}
                     />
                     <Tab.Screen
-                        name="Booked"
+                        name="BookedTab"
                         component={BookedNavigator}
                         options={{
                             tabBarIcon: route => (
