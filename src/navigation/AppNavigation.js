@@ -20,6 +20,13 @@ const BookedStack = createStackNavigator();
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
+const navigatorOptions = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
+    },
+    headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
+}
+
 export default function AppNavigation() {
 
     return (
@@ -66,12 +73,7 @@ export default function AppNavigation() {
 // Stack navigators screens
 function PostNavigator() {
     return (
-        <PostStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
-            },
-            headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
-        }}>
+        <PostStack.Navigator screenOptions={navigatorOptions}>
             <PostStack.Screen name="Main" component={MainScreen} options={mainScreenOptions}/>
             <PostStack.Screen name="Post" component={PostScreen} options={postScreenOptions}/>
         </PostStack.Navigator>
@@ -80,12 +82,7 @@ function PostNavigator() {
 
 function BookedNavigator() {
     return (
-        <BookedStack.Navigator screenOptions={{
-            headerStyle: {
-                backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
-            },
-            headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
-        }}>
+        <BookedStack.Navigator screenOptions={navigatorOptions}>
             <BookedStack.Screen name="Booked" component={BookedScreen} options={bookedScreenOptions}/>
             <BookedStack.Screen name="Post" component={PostScreen} options={postScreenOptions}/>
         </BookedStack.Navigator>
