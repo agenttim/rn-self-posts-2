@@ -7,6 +7,8 @@ import {Item} from "react-navigation-header-buttons";
 import {PostList} from "../components/PostList";
 
 export const MainScreen = ({navigation}) => {
+
+
     const openPostHandler = post => {
         navigation.navigate('Post', {postId: post.id, date: post.date})
 
@@ -15,23 +17,25 @@ export const MainScreen = ({navigation}) => {
     return (<PostList data={DATA} onOpen={openPostHandler}/>)
 }
 
-export const mainScreenOptions = {
-    headerTitle: 'Мой блог',
-    headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item
-                title="Take photo"
-                iconName='ios-camera'
-                onPress={() => console.log('Press photo')}
-            />
-        </HeaderButtons>),
-    headerLeft: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item
-                title="Toggle Drawer"
-                iconName='ios-menu'
-                onPress={() => console.log('Press photo')}
-                buttonStyle={{marginLeft: 10}}
-            />
-        </HeaderButtons>)
+export function mainScreenOptions({navigation}) {
+    return {
+        headerTitle: 'Мой блог',
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item
+                    title="Take photo"
+                    iconName='ios-camera'
+                    onPress={() => console.log('Press photo')}
+                />
+            </HeaderButtons>),
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item
+                    title="Toggle Drawer"
+                    iconName='ios-menu'
+                    onPress={() => navigation.toggleDrawer()}
+                    buttonStyle={{marginLeft: 10}}
+                />
+            </HeaderButtons>)
+    }
 }
