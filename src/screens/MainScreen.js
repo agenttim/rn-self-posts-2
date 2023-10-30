@@ -41,11 +41,9 @@ export const mainScreenOptions = {
                 title="Toggle Drawer"
                 iconName='ios-menu'
                 onPress={() => console.log('Press photo')}
+                buttonStyle={{marginLeft: 10}}
             />
-        </HeaderButtons>),
-    headerLeftContainerStyle: {
-        marginLeft: 10
-    }
+        </HeaderButtons>)
 }
 
 const styles = StyleSheet.create({

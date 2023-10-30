@@ -7,7 +7,7 @@ import {Ionicons} from '@expo/vector-icons';
 
 import {MainScreen, mainScreenOptions} from '../screens/MainScreen';
 import {PostScreen, postScreenOptions} from '../screens/PostScreen';
-import {BookedScreen} from '../screens/BookedScreen';
+import {BookedScreen, bookedScreenOptions} from '../screens/BookedScreen';
 
 import {THEME} from '../theme';
 import {Post} from "../components/Post";
@@ -23,8 +23,9 @@ export default function AppNavigation() {
     return (
         <NavigationContainer>
             <Tab.Navigator
-                screenOptions={({route}) => ({
+                screenOptions={() => ({
                     tabBarActiveTintColor: THEME.MAIN_COLOR,
+                    headerShown: false
                 })}
             >
                 <Tab.Screen
@@ -74,8 +75,8 @@ function BookedNavigator() {
             },
             headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
         }}>
-            <BookedStack.Screen name="Booked" component={BookedScreen}/>
-            <BookedStack.Screen name="Post" component={PostScreen}/>
+            <BookedStack.Screen name="Booked" component={BookedScreen} options={bookedScreenOptions}/>
+            <BookedStack.Screen name="Post" component={PostScreen} options={postScreenOptions}/>
         </BookedStack.Navigator>
     );
 }
