@@ -22,21 +22,30 @@ export default function AppNavigation() {
 
     return (
         <NavigationContainer>
-            <PostNavigator>
-
-            </PostNavigator>
-            {/*<Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={({route}) => ({
+                    tabBarActiveTintColor: THEME.MAIN_COLOR,
+                })}
+            >
                 <Tab.Screen
                     name="Post"
                     component={PostNavigator}
-                    //...tab config
+                    options={{
+                        tabBarIcon: route => (
+                            <Ionicons name='ios-albums' size={25} color={route.color}/>
+                        )
+                    }}
                 />
                 <Tab.Screen
                     name="Booked"
                     component={BookedNavigator}
-                    //...tab config
+                    options={{
+                        tabBarIcon: route => (
+                            <Ionicons name='ios-star' size={25} color={route.color}/>
+                        )
+                    }}
                 />
-            </Tab.Navigator>*/}
+            </Tab.Navigator>
         </NavigationContainer>
     );
 
@@ -59,7 +68,12 @@ function PostNavigator() {
 
 function BookedNavigator() {
     return (
-        <BookedStack.Navigator>
+        <BookedStack.Navigator screenOptions={{
+            headerStyle: {
+                backgroundColor: Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
+            },
+            headerTintColor: Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR
+        }}>
             <BookedStack.Screen name="Booked" component={BookedScreen}/>
             <BookedStack.Screen name="Post" component={PostScreen}/>
         </BookedStack.Navigator>
