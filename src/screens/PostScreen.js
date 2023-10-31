@@ -1,53 +1,67 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Button, ScrollView, Alert} from 'react-native';
 import {DATA} from "../data";
 import {THEME} from "../theme";
 import {HeaderButtons} from "react-navigation-header-buttons/src/HeaderButtons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {Item} from "react-navigation-header-buttons";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleBooked} from "../store/actions/post";
 
 export const PostScreen = ({navigation, route}) => {
 
+    const dispatch = useDispatch()
 
-   const postId = route.params.postId
+    const postId = route.params.postId
 
-   const post = DATA.find(p => p.id === postId)
+    const post = DATA.find(p => p.id === postId)
 
-   useEffect(()=> {
-       navigation.setParams({booked: post.booked})
-   }, [])
+    const booked = useSelector(state => state.post.bookedPosts.some(p => p.id === postId))
 
-   const removeHandler = () => {
-       Alert.alert('Удаление поста', 'Вы точно хотите удалить пост?', [
-               {
-                   text: 'Отменить',
-                   style: 'cancel'
-               },
-               {
-                   text: 'Удалить',
-                   onPress: () => {
-                   },
-                   style: 'destructive',
-               },
-           ],
-           {cancelable: false}
-       )
-   }
+        useEffect(() => {
+            navigation.setParams({booked: post.booked})
+        }, [booked])
 
-   return (
-       <ScrollView>
-           <Image source={{uri: post.img}} style={styles.image}/>
-           <View style={styles.textWrap}>
-               <Text style={styles.title}>{post.text}</Text>
-           </View>
-           <Button title='Удалить' color={THEME.DANGER_COLOR} onPress={removeHandler}/>
-       </ScrollView>
-   )
+    const toggleHandler = useCallback(() => {
+        dispatch(toggleBooked(postId))
+    }, [dispatch, postId])
+
+    useEffect(() => {
+        navigation.setParams({toggleHandler})
+    }, [toggleHandler])
+
+    const removeHandler = () => {
+        Alert.alert('Удаление поста', 'Вы точно хотите удалить пост?', [
+                {
+                    text: 'Отменить',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Удалить',
+                    onPress: () => {
+                    },
+                    style: 'destructive',
+                },
+            ],
+            {cancelable: false}
+        )
+    }
+
+    return (
+        <ScrollView>
+            <Image source={{uri: post.img}} style={styles.image}/>
+            <View style={styles.textWrap}>
+                <Text style={styles.title}>{post.text}</Text>
+            </View>
+            <Button title='Удалить' color={THEME.DANGER_COLOR} onPress={removeHandler}/>
+        </ScrollView>
+    )
 }
 
 export const postScreenOptions = ({navigation, route}) => {
     const date = route.params.date
     const booked = route.params.booked
+    const toggleHandler = route.params.toggleHandler
     const iconName = booked ? 'ios-star' : 'ios-star-outline'
 
     return {
@@ -57,7 +71,7 @@ export const postScreenOptions = ({navigation, route}) => {
                 <Item
                     title="Take photo"
                     iconName={iconName}
-                    onPress={() => console.log('Press photo')}/>
+                    onPress={toggleHandler}/>
             </HeaderButtons>)
     }
 }
