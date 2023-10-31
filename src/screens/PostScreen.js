@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Button, ScrollView, Alert} from 'react-native';
-import {DATA} from "../data";
 import {THEME} from "../theme";
 import {HeaderButtons} from "react-navigation-header-buttons/src/HeaderButtons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {Item} from "react-navigation-header-buttons";
 import {useDispatch, useSelector} from "react-redux";
-import {toggleBooked} from "../store/actions/post";
+import {removePost, toggleBooked} from "../store/actions/post";
 
 export const PostScreen = ({navigation, route}) => {
 
@@ -14,13 +13,13 @@ export const PostScreen = ({navigation, route}) => {
 
     const postId = route.params.postId
 
-    const post = DATA.find(p => p.id === postId)
+    const post = useSelector(state => state.post.allPosts.find(p => p.id === postId))
 
     const booked = useSelector(state => state.post.bookedPosts.some(p => p.id === postId))
 
-        useEffect(() => {
-            navigation.setParams({booked: post.booked})
-        }, [booked])
+    useEffect(() => {
+        navigation.setParams({booked})
+    }, [booked])
 
     const toggleHandler = useCallback(() => {
         dispatch(toggleBooked(postId))
@@ -39,12 +38,18 @@ export const PostScreen = ({navigation, route}) => {
                 {
                     text: 'Удалить',
                     onPress: () => {
+                        navigation.navigate('Main')
+                        dispatch(removePost(postId))
                     },
                     style: 'destructive',
                 },
             ],
             {cancelable: false}
         )
+    }
+
+    if (!post) {
+        return null
     }
 
     return (
