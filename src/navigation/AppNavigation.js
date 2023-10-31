@@ -40,10 +40,36 @@ export default function AppNavigation() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <MainNavigator.Navigator>
-                    <MainNavigator.Screen name="Main Screen" component={TabNavigator} options={{headerShown: false}}/>
-                    <MainNavigator.Screen name="Create Screen" component={CreateNavigator} options={{headerShown: false}}/>
-                    <MainNavigator.Screen name="About Screen" component={AboutNavigator} options={{headerShown: false}}/>
+                <MainNavigator.Navigator
+                    screenOptions={{
+                        drawerActiveTintColor: THEME.MAIN_COLOR,
+                        drawerLabelStyle: {
+                            fontFamily: 'open-bold'
+                        }
+                    }}>
+                    <MainNavigator.Screen
+                        name="Main Screen"
+                        component={TabNavigator}
+                        options={{
+                            headerShown: false,
+                            drawerLabel: "Главная",
+                            drawerIcon: () => <Ionicons name='apps' style={{fontSize: 30}}/>,
+
+                        }}/>
+                    <MainNavigator.Screen
+                        name="Create Screen"
+                        component={CreateNavigator}
+                        options={{
+                            headerShown: false,
+                            drawerLabel: "Создать пост"
+                        }}/>
+                    <MainNavigator.Screen
+                        name="About Screen"
+                        component={AboutNavigator}
+                        options={{
+                            headerShown: false,
+                            drawerLabel: "О приложении"
+                        }}/>
                 </MainNavigator.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>

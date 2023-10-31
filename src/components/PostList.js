@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {DATA} from "../data";
 import {Post} from "./Post";
 
 export const PostList = ({data, onOpen}) => {
