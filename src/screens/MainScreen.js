@@ -6,6 +6,8 @@ import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {Item} from "react-navigation-header-buttons";
 import {PostList} from "../components/PostList";
 
+
+
 export const MainScreen = ({navigation}) => {
 
 
@@ -25,7 +27,7 @@ export function mainScreenOptions({navigation}) {
                 <Item
                     title="Take photo"
                     iconName='ios-camera'
-                    onPress={() => console.log('Press photo')}
+                    onPress={() => navigation.navigate('Create Screen')}
                 />
             </HeaderButtons>),
         headerLeft: () => (

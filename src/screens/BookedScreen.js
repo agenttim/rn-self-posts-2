@@ -15,15 +15,17 @@ export const BookedScreen = ({navigation}) => {
     return (<PostList data={DATA.filter(post => post.booked)} onOpen={openPostHandler}/>)
 }
 
-export const bookedScreenOptions = {
-    headerTitle: 'Избранное',
-    headerLeft: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item
-                title="Toggle Drawer"
-                iconName='ios-menu'
-                onPress={() => console.log('Press photo')}
-                buttonStyle={{marginLeft: 10}}
-            />
-        </HeaderButtons>)
+export function bookedScreenOptions({navigation}) {
+    return {
+        headerTitle: 'Избранное',
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                <Item
+                    title="Toggle Drawer"
+                    iconName='ios-menu'
+                    onPress={() => navigation.toggleDrawer()}
+                    buttonStyle={{marginLeft: 10}}
+                />
+            </HeaderButtons>)
+    }
 }

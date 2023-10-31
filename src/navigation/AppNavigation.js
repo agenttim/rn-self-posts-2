@@ -13,12 +13,16 @@ import {THEME} from '../theme';
 import {createMaterialBottomTabNavigator} from "react-native-paper/react-navigation";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {createDrawerNavigator} from "@react-navigation/drawer";
-import {AboutScreen} from "../screens/AboutScreen";
-import {CreateScreen} from "../screens/CreateScreen";
+import {AboutScreen, aboutScreenOptions} from "../screens/AboutScreen";
+import {CreateScreen, createScreenOptions} from "../screens/CreateScreen";
 
 const PostStack = createStackNavigator();
 
 const BookedStack = createStackNavigator();
+
+const AboutStack = createStackNavigator();
+
+const CreateStack = createStackNavigator();
 
 const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
@@ -37,9 +41,9 @@ export default function AppNavigation() {
         <SafeAreaProvider>
             <NavigationContainer>
                 <MainNavigator.Navigator>
-                    <MainNavigator.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}}/>
-                    <MainNavigator.Screen name="AboutScreen" component={AboutScreen} />
-                    <MainNavigator.Screen name="CreateScreen" component={CreateScreen}/>
+                    <MainNavigator.Screen name="Main Screen" component={TabNavigator} options={{headerShown: false}}/>
+                    <MainNavigator.Screen name="Create Screen" component={CreateNavigator} options={{headerShown: false}}/>
+                    <MainNavigator.Screen name="About Screen" component={AboutNavigator} options={{headerShown: false}}/>
                 </MainNavigator.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
@@ -64,6 +68,22 @@ function BookedNavigator() {
             <BookedStack.Screen name="Post" component={PostScreen} options={postScreenOptions}/>
         </BookedStack.Navigator>
     );
+}
+
+function AboutNavigator() {
+    return (
+        <AboutStack.Navigator screenOptions={navigatorOptions}>
+            <AboutStack.Screen name="About" component={AboutScreen} options={aboutScreenOptions}/>
+        </AboutStack.Navigator>
+    )
+}
+
+function CreateNavigator() {
+    return (
+        <CreateStack.Navigator screenOptions={navigatorOptions}>
+            <CreateStack.Screen name="Create" component={CreateScreen} options={createScreenOptions}/>
+        </CreateStack.Navigator>
+    )
 }
 
 function TabNavigator() {
