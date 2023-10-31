@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import AppLoading from 'expo-app-loading'
 import AppNavigation from './src/navigation/AppNavigation'
-import { bootstrap } from './src/bootstrap'
+import {bootstrap} from './src/bootstrap'
+import {Provider} from "react-redux";
+import store from "./src/store";
 
 export default function App() {
     const [isReady, setIsReady] = useState(false)
@@ -17,6 +19,8 @@ export default function App() {
     }
 
     return (
-            <AppNavigation />
+        <Provider store={store}>
+            <AppNavigation/>
+        </Provider>
     )
 }
