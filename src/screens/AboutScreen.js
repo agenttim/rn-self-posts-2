@@ -7,7 +7,8 @@ import {Item} from "react-navigation-header-buttons";
 export const AboutScreen = ({}) => {
     return (
         <View style={styles.center}>
-            <Text>AboutScreen</Text>
+            <Text>Это лучшее приложение для личных заметок.</Text>
+            <Text>Версия <Text style={styles.version}>1.0.0</Text></Text>
         </View>
     )
 }
@@ -32,5 +33,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+    version: {
+        fontFamily: 'open-bold'
     }
 })
